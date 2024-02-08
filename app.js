@@ -3,6 +3,9 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const https = require('https') // native module
 
+require('dotenv').config();
+console.log(process.env);
+
 const app = express(); // new express app
 
 // to serve static files like local images and stylesheet
@@ -44,7 +47,7 @@ app.post('/', function(req, res) {
 
     const options = {
         method : "POST",
-        auth : "krrish08:6cb360534ed40c9a15e7f311cb059717-us21"
+        auth : "krrish08:" + process.env.API_KEY
     }
 
     // post request without third party module
