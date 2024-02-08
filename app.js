@@ -19,12 +19,59 @@ app.get('/', function(req, res){
 
 app.post('/', function(req, res) {
     // camelcase
-    var fName = req.body.fname;
-    var lName = req.body.lname;
-    var email = req.body.email;
+    const fName = req.body.fname;
+    const lName = req.body.lname;
+    const email = req.body.email;
     console.log(fName, lName, email); // check action set to home routed and method is post! 
+    
+    // data to post to mailchip
+    const data = {
+        members : [
+            // object 1
+            {
+                email_address: email, 
+                status : "subscribed",
+                merge_fields : {
+                    FNAME : fName,
+                    LNAME : lName
+                }
+            }
+
+        ]
+    };
+    const jsonData = JSON.stringify(data);
+    const url = 'https://us21.api.mailchimp.com/3.0/lists/a66d4dbb4c'
+
+    const options = {
+        method : "POST",
+        auth : "krrish08:439bb90bcf15c2a49a8fba9cc8959def-us21"
+    }
+
+    // post request without third party module
+    const request = https.request(url, options, function(response){
+
+        if(response.statusCode === 200) {
+            res.sendFile(__dirname + "/success.html");
+        }
+        else {
+            res.sendFile(__dirname + "/failure.html");
+        }
+ 
+        response.on("data", function(data){
+            // console.log(JSON.parse(data))
+        })
+    })
+    request.write(jsonData);
+    request.end();
+
 })
 
-app.listen(3000, function(){
+// Because post request is sent from form.
+// get request when we search in url and post when form submit (method='post') 
+app.post('/failure', function(req, res) {
+    res.redirect('/');
+})
+
+app.listen(process.env.PORT || 3000, function(){
     console.log('server running at port 3000');
 })
