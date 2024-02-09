@@ -23,7 +23,8 @@
     <!-- On submit info inside will posted on home route ('/') location -->
     <form class="form-signin" action="/" method="post">
         <!-- url relative to public -->
-      <img class="mb-4" src="/public/images/logo.jpg" alt="" width="72" height="72">
+        <!-- start with images/. public folder is already included as static in app.js. -->
+      <img class="mb-4" src="images/logo.jpg" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">SignUp to Newsletter!</h1>
       <input type="text" class="form-control top" name="fname" placeholder="First Name" required autofocus>
       <input type="text" class="form-control middle" name="lname" placeholder="Last Name" required>
