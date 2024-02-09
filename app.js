@@ -4,7 +4,7 @@ const request = require('request');
 const https = require('https') // native module
 
 require('dotenv').config();
-console.log(process.env);
+// console.log(process.env);
 
 const app = express(); // new express app
 
