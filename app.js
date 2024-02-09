@@ -47,7 +47,7 @@ app.post('/', function(req, res) {
 
     const options = {
         method : "POST",
-        auth : "krrish08:" + process.env.API_KEY
+        auth : "krrish08:eaeaf0f8548e249d0fd09f572ab338a6-us21"
     }
 
     // post request without third party module
